@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+    <title>Route Show Page</title>
+</head>
+
+<body>
+    <h4>Route #<%=route.route_short_name%> - <%= route.route_long_name %></h4>
+    <div id='map' style='width: 100%; height: 600px;'></div>
+    <form action="/<%=route.route_id%>" method="GET">
+        <select name="direction" id="category">
+            <option value="0">Outbound</option>
+            <option value="1">Inbound</option>
+        </select>
+        <button>Submit</button>
+    </form>
+    <a href="/">Back to Routes</a>
+
+    <script>
+        const coordinates = <%-JSON.stringify(coordinates)%>;
+        const stops = <%-JSON.stringify(stops)%>;
+        const accessToken = '<%-process.env.MAPBOX_TOKEN%>';   
+    </script>
+    <script src="/javascripts/pageMap.js"></script>
+</body>
+
+</html>
