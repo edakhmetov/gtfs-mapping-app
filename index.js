@@ -26,10 +26,10 @@ app.get('/', wrapAsync(async (req, res, next) => {
 }));
 
 app.get('/:id', wrapAsync(async (req, res, next) => {
-    const { direction = 0 } = req.query;
+    const { direction = 0, routeOption = 0 } = req.query;
     const routeId = req.params.id;
-    const { coordinates, route, stops } = await getGeoData(routeId, direction);
-    res.render('show', { coordinates, stops, route });
+    const { coordinates, route, stops, uniqueShapes } = await getGeoData(routeId, direction, routeOption);
+    res.render('show', { coordinates, stops, route, uniqueShapes, routeOption, direction });
 }));
 
 app.all('*', (req, res, next) => {

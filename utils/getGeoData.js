@@ -13,19 +13,31 @@ const config = {
 
 const db = await openDb(config);
 
-export async function getGeoData(routeId, direction) {
+export async function getGeoData(routeId, direction, routeOption) {
     const routes = await getRoutes({
         route_id: routeId
     });
     const route = routes[0];
-    const shapes = await getShapes(
+    const allShapes = await getShapes(
         {
             route_id: routeId,
             direction_id: direction
+        }
+    );
+    const newShapes = allShapes.map((shape) => {
+        const x = shape.shape_id;
+        return x
+    });
+    const uniqueShapes = [... new Set(newShapes)];
+    const shapes = await getShapes(
+        {
+            route_id: routeId,
+            direction_id: direction,
+            shape_id: uniqueShapes[routeOption]
         },
         [],
         [
-            ['shape_pt_sequence', 'ASC']
+            ['shape_dist_traveled', 'ASC']
         ]
     );
     const coordinates = [];
@@ -44,7 +56,8 @@ export async function getGeoData(routeId, direction) {
     return {
         route,
         coordinates,
-        stops
+        stops,
+        uniqueShapes
     }
 }
 

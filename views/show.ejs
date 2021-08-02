@@ -14,9 +14,17 @@
     <h4>Route #<%=route.route_short_name%> - <%= route.route_long_name %></h4>
     <div id='map' style='width: 100%; height: 600px;'></div>
     <form action="/<%=route.route_id%>" method="GET">
-        <select name="direction" id="category">
-            <option value="0">Outbound</option>
-            <option value="1">Inbound</option>
+        <select name="routeOption" id="routeOption">
+            <% uniqueShapes.forEach(function(val, i) { %> 
+            <option value="<%=i%>" <%=routeOption == i ? 'selected' : ''%>><%=i%></option>
+            <% }) %> 
+        </select>
+        <button>Submit</button>
+    </form>
+    <form action="/<%=route.route_id%>" method="GET">
+        <select name="direction" id="direction">
+            <option value="0" <%=direction === 0 ? 'selected' : ''%>>Outbound</option>
+            <option value="1" <%=direction == 1 ? 'selected' : ''%>>Inbound</option>
         </select>
         <button>Submit</button>
     </form>
