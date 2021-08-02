@@ -5,6 +5,9 @@ const sqlPath = './data/sql/gtfs';
 const config = {
     sqlitePath: sqlPath,
     agencies: [
+        // {
+        //     url: 'http://linktoyourGTFSfeed.com'
+        // },
         {
             path: './data/gtfs.zip'
         }
