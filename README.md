@@ -10,3 +10,4 @@ Once the URL is provided (or .zip file is placed in data folder), run
 node importGtfs.js
 ```
 This will import all the data and create an sql database in data/sql folder.
+This will import all the data and create an sql database in data/sql folder.
