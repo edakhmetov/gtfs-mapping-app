@@ -1,10 +1,9 @@
-import { openDb, getStops, getShapes, getRoutes } from 'gtfs';
+import { openDb, getStops, getShapes, getRoutes, importGtfs } from 'gtfs';
 import { ExpressError } from './ExpressError.js';
-import * as fs from 'fs';
 
-const sqlPath = './sql/gtfs';
+const sqlPath = './data/sql/gtfs';
 const config = {
-    sqlitePath: './sql/gtfs',
+    sqlitePath: sqlPath,
     agencies: [
         {
             path: './data/'
@@ -12,19 +11,7 @@ const config = {
     ]
 };
 
-if (!fs.existsSync(sqlPath)) {
-    importGtfs(config)
-        .then(() => {
-            console.log('Import Successful');
-        })
-        .catch(err => {
-            console.error(err);
-        });
-}
-
-
 const db = await openDb(config);
-
 
 export async function getGeoData(routeId, direction) {
     const routes = await getRoutes({

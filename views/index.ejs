@@ -18,7 +18,7 @@
         <label for="pageSelection">Go to Page</label>
         <select name="page" id="pageSelection">
             <% for (let i = 1; i <= Math.ceil(length/50); i++) {%>
-                <option value="<%=i%>"><%=i%></option>
+                <option value="<%=i%>" <%= i==page ? 'selected' : ''%>><%=i%></option>
             <% } %>  
         </select>
         <button>Submit</button>
