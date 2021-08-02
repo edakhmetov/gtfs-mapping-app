@@ -6,5 +6,7 @@ Simple App that uses GTFS feed and creates a list of all public transport routes
 In the `importGtfs.js` file, you can choose to import GTFS feed from a URL, or by downloading .zip file and placing it inside data folder
 
 Once the URL is provided (or .zip file is placed in data folder), run 
-`node importGtfs.js`
+```
+node importGtfs.js
+```
 This will import all the data and create an sql database in data/sql folder.
