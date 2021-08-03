@@ -1,17 +1,19 @@
 import { } from 'dotenv/config'
-import express from 'express';
 import path from 'path';
+import express from 'express';
 import { dirname } from 'path';
+import ejsMate from 'ejs-mate';
 import { fileURLToPath } from 'url';
-import { getGeoData, getRoutesData } from './utils/getGeoData.js';
-import { ExpressError } from './utils/ExpressError.js';
 import { wrapAsync } from './utils/WrapAsync.js';
+import { ExpressError } from './utils/ExpressError.js';
+import { getGeoData, getRoutesData } from './utils/getGeoData.js';
 
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+app.engine('ejs', ejsMate);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -20,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', wrapAsync(async (req, res, next) => {
-    const { page = 1 } = req.query;
+    const page = parseInt(req.query.page) || 1;
     const { routes, length } = await getRoutesData(page);
     res.render('index', { routes, length, page });
 }));

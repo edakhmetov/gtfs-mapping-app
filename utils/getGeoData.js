@@ -72,7 +72,7 @@ for (let route of allRoutes) {
     }
 };
 export async function getRoutesData(page) {
-    const count = 50;
+    const count = 25;
     const start = count * (page - 1);
     const end = count * page
     const routes = showRoutes.slice(start, end);
