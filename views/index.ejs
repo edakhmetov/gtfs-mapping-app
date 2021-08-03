@@ -1,19 +1,17 @@
 <% layout('layouts/boilerplate') %>
     <ul>
         <% for (let route of routes) { %>
-            <li><a href="/<%=route.route_id%>">
-                <%= route.route_short_name %> / <%= route.route_long_name %>
-            </a></li>
+        <li class="box">
+            <a href="/<%=route.route_id%>"><%= route.route_short_name %> / <%= route.route_long_name %></a>
+        </li>
         <% } %>
     </ul>
-    <nav class="pagination is-centered is-rounded is-small" role="navigation" aria-label="pagination">
-        <a class="pagination-previous" href="/?page=<%=page-1%>" <%=(page-1) <= 0 ? 'disabled' : ''%>>&laquo;</a>
-        <a class="pagination-next" href="/?page=<%=page+1%>" <%=(page+1) > Math.ceil(length/25) ? 'disabled' : ''%>>&raquo;</a>
+    <div class="pagination is-centered is-rounded is-small" role="navigation" aria-label="pagination">
         <ul class="pagination-list">
             <% for (let i=1; i <=Math.ceil(length/25); i++) {%>
-                <li>
-                    <a href="/?page=<%=i%>" class="pagination-link <%=i==page ? 'is-current' : ''%>" aria-label="Goto page <%=i%>"><%=i%></a>
-                </li>
+            <li>
+                <a href="/?page=<%=i%>" class="pagination-link <%=i==page ? 'is-current' : ''%>" aria-label="Goto page <%=i%>"><%=i%></a>
+            </li>
             <% } %>
         </ul>
-    </nav>
+    </div>
