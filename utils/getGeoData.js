@@ -71,8 +71,7 @@ for (let route of allRoutes) {
         showRoutes.push(route);
     }
 };
-export async function getRoutesData(page) {
-    const count = 25;
+export async function getRoutesData(page, count) {
     const start = count * (page - 1);
     const end = count * page
     const routes = showRoutes.slice(start, end);

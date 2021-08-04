@@ -8,9 +8,9 @@
     </ul>
     <div class="pagination is-centered is-rounded is-small" role="navigation" aria-label="pagination">
         <ul class="pagination-list">
-            <% for (let i=1; i <=Math.ceil(length/25); i++) {%>
+            <% for (let i=1; i <=Math.ceil(length/count); i++) {%>
             <li>
-                <a href="/?page=<%=i%>" class="pagination-link <%=i==page ? 'is-current' : ''%>" aria-label="Goto page <%=i%>"><%=i%></a>
+                <a href="/?page=<%=i%><%=count!== 50 ? `&count=${count}` : ''%>" class="pagination-link <%=i==page ? 'is-current' : ''%>" aria-label="Goto page <%=i%>"><%=i%></a>
             </li>
             <% } %>
         </ul>

@@ -23,8 +23,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', wrapAsync(async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
-    const { routes, length } = await getRoutesData(page);
-    res.render('index', { routes, length, page });
+    const count = parseInt(req.query.count) || 50;
+    const { routes, length } = await getRoutesData(page, count);
+    res.render('index', { routes, length, page, count });
 }));
 
 app.get('/:id', wrapAsync(async (req, res, next) => {
