@@ -1,17 +1,37 @@
 <% layout('layouts/boilerplate') %>
-    <ul>
+    <div class="title has-text-centered">Welcome to GTFS Mapping App</div>
+    <form action="/search/" method="GET">
+        <div class="field has-addons">
+                <input class="input" type="text" name="route" placeholder="Route Number">
+            <div class="control">
+                <button class="button"> submit</button>
+            </div>
+        </div>
+    </form>
+    <ul class="tile is-ancestor is-vertical">
         <% for (let route of routes) { %>
-        <li class="box">
-            <a href="/<%=route.route_id%>"><%= route.route_short_name %> / <%= route.route_long_name %></a>
-        </li>
+            <li class="tile is-parent">
+                <div class="tile is-2">
+                    <%= route.route_short_name %>
+                </div>
+                <div class="tile is-9">
+                    <%= route.route_long_name %>
+                </div>
+                <div class="tile">
+                    <a href="/<%=route.route_id%>">Show</a>
+                </div>
+            </li>
         <% } %>
     </ul>
     <div class="pagination is-centered is-rounded is-small" role="navigation" aria-label="pagination">
         <ul class="pagination-list">
             <% for (let i=1; i <=Math.ceil(length/count); i++) {%>
-            <li>
-                <a href="/?page=<%=i%><%=count!== 50 ? `&count=${count}` : ''%>" class="pagination-link <%=i==page ? 'is-current' : ''%>" aria-label="Goto page <%=i%>"><%=i%></a>
-            </li>
+                <li>
+                    <a href="/?page=<%=i%><%=count!== 10 ? `&count=${count}` : ''%>"
+                        class="pagination-link <%=i==page ? 'is-current' : ''%>" aria-label="Goto page <%=i%>">
+                        <%=i%>
+                    </a>
+                </li>
             <% } %>
         </ul>
     </div>

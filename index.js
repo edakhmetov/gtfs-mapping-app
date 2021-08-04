@@ -6,7 +6,7 @@ import ejsMate from 'ejs-mate';
 import { fileURLToPath } from 'url';
 import { wrapAsync } from './utils/WrapAsync.js';
 import { ExpressError } from './utils/ExpressError.js';
-import { getGeoData, getRoutesData } from './utils/getGeoData.js';
+import { getGeoData, getRoutesData, searchRoute } from './utils/getGeoData.js';
 
 
 const app = express();
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', wrapAsync(async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
-    const count = parseInt(req.query.count) || 50;
+    const count = parseInt(req.query.count) || 10;
     const { routes, length } = await getRoutesData(page, count);
     res.render('index', { routes, length, page, count });
 }));
@@ -33,6 +33,15 @@ app.get('/:id', wrapAsync(async (req, res, next) => {
     const routeId = req.params.id;
     const { coordinates, route, stops, uniqueShapes } = await getGeoData(routeId, direction, routeOption);
     res.render('show', { coordinates, stops, route, uniqueShapes, routeOption, direction });
+}));
+
+app.get('/search/', wrapAsync(async (req, res, next) => {
+    const page = parseInt(req.query.page) || 1;
+    const count = parseInt(req.query.count) || 10;
+    const { route } = req.query;
+    console.log(route);
+    const { routes, length } = await searchRoute(route);
+    res.render('index', { routes, length, page, count });
 }));
 
 app.all('*', (req, res, next) => {

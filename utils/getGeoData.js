@@ -78,3 +78,11 @@ export async function getRoutesData(page, count) {
     const length = showRoutes.length;
     return { routes, length }
 }
+
+export async function searchRoute(routeShortName) {
+    const routes = await getRoutes({
+        route_short_name: routeShortName
+    });
+    const length = routes.length;
+    return { routes, length };
+}
