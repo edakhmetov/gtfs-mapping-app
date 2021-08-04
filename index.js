@@ -28,13 +28,6 @@ app.get('/', wrapAsync(async (req, res, next) => {
     res.render('index', { routes, length, page, count });
 }));
 
-app.get('/:id', wrapAsync(async (req, res, next) => {
-    const { direction = 0, routeOption = 0 } = req.query;
-    const routeId = req.params.id;
-    const { coordinates, route, stops, uniqueShapes } = await getGeoData(routeId, direction, routeOption);
-    res.render('show', { coordinates, stops, route, uniqueShapes, routeOption, direction });
-}));
-
 app.get('/search/', wrapAsync(async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
     const count = parseInt(req.query.count) || 10;
@@ -43,6 +36,15 @@ app.get('/search/', wrapAsync(async (req, res, next) => {
     const { routes, length } = await searchRoute(route);
     res.render('index', { routes, length, page, count });
 }));
+
+app.get('/:id', wrapAsync(async (req, res, next) => {
+    const { direction = 0, routeOption = 0 } = req.query;
+    const routeId = req.params.id;
+    const { coordinates, route, stops, uniqueShapes } = await getGeoData(routeId, direction, routeOption);
+    res.render('show', { coordinates, stops, route, uniqueShapes, routeOption, direction });
+}));
+
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError(404, 'Page Not Found'));
