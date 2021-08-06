@@ -1,25 +1,31 @@
 <% layout('layouts/boilerplate') %>
-    <h4>Route #<%=route.route_short_name%> - <%= route.route_long_name %></h4>
-    <div id='map' style='width: 100%; height: 600px;'></div>
-    <form action="/<%=route.route_id%>" method="GET">
-        <select name="routeOption" id="routeOption">
-            <% uniqueShapes.forEach(function(val, i) { %> 
-            <option value="<%=i%>" <%=routeOption == i ? 'selected' : ''%>><%=i%></option>
-            <% }) %> 
-        </select>
-        <button>Submit</button>
+    <div class="mb-4" id='map' style='width: 100%; height: 700px;'></div>
+    <form action="/<%=route.route_id%>" method="GET" class="box">
+        <h2 class="title">Route #<%=route.route_short_name%></h2>
+        <h4 class="subtitle"><%= route.route_long_name %></h4>
+        <label class="label" for="routeOption">Route Option</label>
+        <div class="field select">
+            <select name="routeOption" id="routeOption">
+                <% uniqueShapes.forEach(function(val, i) { %>
+                    <option value="<%=i%>" <%=routeOption==i ? 'selected' : '' %>><%=i%>
+                    </option>
+                    <% }) %>
+            </select>
+        </div>
+        <label class="label" for="direction">Route Direction</label>
+        <div class="field select">
+            <select name="direction" id="direction">
+                <option value="0" <%=direction===0 ? 'selected' : '' %>>Outbound</option>
+                <option value="1" <%=direction==1 ? 'selected' : '' %>>Inbound</option>
+            </select>
+        </div>
+        <button class="button">Submit</button>
     </form>
-    <form action="/<%=route.route_id%>" method="GET">
-        <select name="direction" id="direction">
-            <option value="0" <%=direction === 0 ? 'selected' : ''%>>Outbound</option>
-            <option value="1" <%=direction == 1 ? 'selected' : ''%>>Inbound</option>
-        </select>
-        <button>Submit</button>
-    </form>
-    <a href="/">Back to Routes</a>
+
+    <a class="button" href="/">Back to Routes</a>
     <script>
         const coordinates = <%-JSON.stringify(coordinates)%>;
         const stops = <%-JSON.stringify(stops)%>;
-        const accessToken = '<%-process.env.MAPBOX_TOKEN%>';   
+        const accessToken = '<%-process.env.MAPBOX_TOKEN%>';
     </script>
     <script src="/javascripts/pageMap.js"></script>

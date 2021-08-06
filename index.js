@@ -32,9 +32,8 @@ app.get('/search/', wrapAsync(async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
     const count = parseInt(req.query.count) || 10;
     const { route } = req.query;
-    console.log(route);
     const { routes, length } = await searchRoute(route);
-    res.render('index', { routes, length, page, count });
+    res.render('search', { routes, length, page, count });
 }));
 
 app.get('/:id', wrapAsync(async (req, res, next) => {

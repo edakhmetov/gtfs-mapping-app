@@ -1,0 +1,40 @@
+<% layout('layouts/boilerplate') %>
+    <div class="title has-text-centered">GTFS Mapping App</div>
+    <form action="/search/" method="GET" class="mb-4">
+        <div class="field has-addons">
+            <input class="input" type="text" name="route" placeholder="Route Number">
+            <div class="control">
+                <button class="button">Search</button>
+            </div>
+        </div>
+    </form>
+    <ul class="tile is-ancestor is-vertical mb-4">
+        <% if (routes.length > 0) { %> 
+            <% for (let route of routes) { %>
+                <li class="tile is-parent">
+                    <div class="tile is-2">
+                        <%= route.route_short_name %>
+                    </div>
+                    <div class="tile is-9">
+                        <%= route.route_long_name %>
+                    </div>
+                    <div class="tile">
+                        <a href="/<%=route.route_id%>">Show</a>
+                    </div>
+                </li>
+            <% } %>
+            <li class="tile is-parent is-centered">
+                <a href="/" class="button">Back to all routes</a>
+            </li>
+        <% } else { %>
+            <li class="tile is-parent is-centered">
+                <div class="tile is-12">
+                    No Routes Found
+                </div>
+            </li>
+            <li class="tile is-parent is-centered">
+                <a href="/" class="button">Back to all routes</a>
+            </li>
+        <% } %>
+    </ul>
+    

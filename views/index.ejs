@@ -1,14 +1,14 @@
 <% layout('layouts/boilerplate') %>
-    <div class="title has-text-centered">Welcome to GTFS Mapping App</div>
-    <form action="/search/" method="GET">
+    <div class="title has-text-centered">GTFS Mapping App</div>
+    <form action="/search/" method="GET" class="mb-4">
         <div class="field has-addons">
                 <input class="input" type="text" name="route" placeholder="Route Number">
             <div class="control">
-                <button class="button"> submit</button>
+                <button class="button">Search</button>
             </div>
         </div>
     </form>
-    <ul class="tile is-ancestor is-vertical">
+    <ul class="tile is-ancestor is-vertical mb-4">
         <% for (let route of routes) { %>
             <li class="tile is-parent">
                 <div class="tile is-2">
