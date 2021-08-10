@@ -23,7 +23,9 @@
             </li>
         <% } %>
     </ul>
-    <div class="pagination is-centered is-rounded is-small" role="navigation" aria-label="pagination">
+    <div class="pagination is-centered is-small" role="navigation" aria-label="pagination">
+        <a class="pagination-previous" href="/?page=<%=page-1%>" <%=page===1 ? 'disabled' : ''%>>Previous</a>
+        <a class="pagination-next" href="/?page=<%=page+1%>" <%=page===Math.ceil(length/count) ? 'disabled' : ''%>>Next page</a>
         <ul class="pagination-list">
             <% for (let i=1; i <=Math.ceil(length/count); i++) {%>
                 <li>
