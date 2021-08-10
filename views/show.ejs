@@ -1,11 +1,8 @@
 <% layout('layouts/boilerplate') %>
     <div class="mb-4 box mx-2" id='map' style='height: 500px;'></div>
-    <form action="/<%=route.route_id%>" method="GET" class="box m-2">
-        <h2 class="title">Route #<%=route.route_short_name%>
-        </h2>
-        <h4 class="subtitle">
-            <%= route.route_long_name %>
-        </h4>
+    <form action="/<%=route.route_id%>" method="GET" class="box mx-2">
+        <h2 class="title">Route #<%=route.route_short_name%></h2>
+        <h4 class="subtitle"><%= route.route_long_name %></h4>
         <label class="label" for="routeOption">Route Option</label>
         <div class="field select is-fullwidth">
             <select name="routeOption" id="routeOption">
@@ -26,10 +23,10 @@
         <button class="button is-fullwidth">Display</button>
     </form>
 
-    <a class="button mb-4 mx-2" href="/">Back to Routes</a>
+    <a class="button mb-4 mx-2" href="/">Back to All Routes</a>
     <script>
-        const coordinates = <% -JSON.stringify(coordinates) %>;
-        const stops = <% -JSON.stringify(stops) %>;
+        const coordinates = <%-JSON.stringify(coordinates)%>;
+        const stops = <%-JSON.stringify(stops)%>;
         const accessToken = '<%-process.env.MAPBOX_TOKEN%>';
     </script>
     <script src="/javascripts/pageMap.js"></script>
