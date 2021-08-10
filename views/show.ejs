@@ -7,9 +7,15 @@
         <div class="field select">
             <select name="routeOption" id="routeOption">
                 <% uniqueShapes.forEach(function(val, i) { %>
-                    <option value="<%=i%>" <%=routeOption==i ? 'selected' : '' %>><%=i%>
+                    <option value="<%=i%>" <%=routeOption==i ? 'selected' : '' %>>
+                        <% if (uniqueNames[i] != undefined) {%>
+                            <%=uniqueNames[i].trip_headsign%>
+                        <% } else {%>
+                            <%=uniqueNames[0].trip_headsign%>
+                        <% } %>   
+                        
                     </option>
-                    <% }) %>
+                <% }) %>
             </select>
         </div>
         <label class="label" for="direction">Route Direction</label>
@@ -22,7 +28,7 @@
         <button class="button">Submit</button>
     </form>
 
-    <a class="button" href="/">Back to Routes</a>
+    <a class="button mb-4" href="/">Back to Routes</a>
     <script>
         const coordinates = <%-JSON.stringify(coordinates)%>;
         const stops = <%-JSON.stringify(stops)%>;

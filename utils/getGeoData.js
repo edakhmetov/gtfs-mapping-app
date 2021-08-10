@@ -1,4 +1,4 @@
-import { openDb, getStops, getShapes, getRoutes, importGtfs } from 'gtfs';
+import { openDb, getStops, getShapes, getRoutes, importGtfs, getTrips } from 'gtfs';
 import { ExpressError } from './ExpressError.js';
 
 const sqlPath = './data/sql/gtfs';
@@ -52,12 +52,28 @@ export async function getGeoData(routeId, direction, routeOption) {
         route_id: routeId,
         direction_id: direction
     });
-
+    const routeNames = await getTrips(
+        {
+            route_id: routeId,
+            direction_id: direction,
+            shape_id: uniqueShapes
+        },
+        [
+            'trip_headsign'
+        ]
+    );
+    const uniqueNames = routeNames.filter((routeName, index) => {
+        const _routeName = JSON.stringify(routeName);
+        return index === routeNames.findIndex(obj => {
+            return JSON.stringify(obj) === _routeName;
+        });
+    });
     return {
         route,
         coordinates,
         stops,
-        uniqueShapes
+        uniqueShapes,
+        uniqueNames
     }
 }
 

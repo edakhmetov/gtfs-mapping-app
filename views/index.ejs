@@ -1,8 +1,17 @@
 <% layout('layouts/boilerplate') %>
-    <div class="title has-text-centered">GTFS Mapping App</div>
+    <section class="hero">
+        <div class="hero-body has-text-centered">
+            <p class="title">
+                GTFS Mapping App
+            </p>
+            <p class="subtitle">
+                Get the route information for all public transportation in Toronto. 
+            </p>
+        </div>
+    </section>
     <form action="/search/" method="GET" class="mb-4">
         <div class="field has-addons">
-                <input class="input" type="text" name="route" placeholder="Route Number">
+            <input class="input" type="text" name="route" placeholder="Route Number">
             <div class="control">
                 <button class="button">Search</button>
             </div>
@@ -24,8 +33,9 @@
         <% } %>
     </ul>
     <div class="pagination is-centered is-small" role="navigation" aria-label="pagination">
-        <a class="pagination-previous" href="/?page=<%=page-1%>" <%=page===1 ? 'disabled' : ''%>>Previous</a>
-        <a class="pagination-next" href="/?page=<%=page+1%>" <%=page===Math.ceil(length/count) ? 'disabled' : ''%>>Next page</a>
+        <a class="pagination-previous" href="/?page=<%=page-1%>" <%=page===1 ? 'disabled' : '' %>>Previous</a>
+        <a class="pagination-next" href="/?page=<%=page+1%>" <%=page===Math.ceil(length/count) ? 'disabled' : '' %>>Next
+            page</a>
         <ul class="pagination-list">
             <% for (let i=1; i <=Math.ceil(length/count); i++) {%>
                 <li>
